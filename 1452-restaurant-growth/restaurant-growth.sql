@@ -1,0 +1,2 @@
+# Write your MySQL query statement below
+select visited_on, sum(total_daily_amount) OVER(order by visited_on rows between 6 preceding and current row) as amount, round(avg(total_daily_amount) over(order by visited_on rows between 6 preceding and current row), 2) as average_amount from (select visited_on, sum(amount) as total_daily_amount from customer group by visited_on) daily_summary limit 6, 999999
